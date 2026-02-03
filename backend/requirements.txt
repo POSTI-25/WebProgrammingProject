@@ -1,0 +1,64 @@
+# Resume Parser - Python Dependencies
+
+# ============================================
+# CORE EXTRACTION LIBRARIES (Step 1)
+# ============================================
+
+# PDF Processing
+pdfplumber>=0.10.0
+
+# DOCX Processing
+python-docx>=1.1.0
+
+# ============================================
+# FUTURE MODULES (Uncomment as needed)
+# ============================================
+
+# NER and Entity Extraction (Step 3)
+# spacy>=3.7.0
+# Download model: python -m spacy download en_core_web_sm
+
+# OCR for Scanned Documents (Step 2)
+# pytesseract>=0.3.10
+# Pillow>=10.0.0
+# pdf2image>=1.16.0
+# Note: Tesseract OCR must be installed separately
+# Windows: https://github.com/UB-Mannheim/tesseract/wiki
+# Mac: brew install tesseract
+# Linux: apt-get install tesseract-ocr
+
+# Date Parsing
+# python-dateutil>=2.8.2
+
+# Phone Number Parsing
+# phonenumbers>=8.13.0
+
+# Email Validation
+# email-validator>=2.1.0
+
+# ============================================
+# DEVELOPMENT & TESTING
+# ============================================
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code Quality
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# ============================================
+# OPTIONAL ENHANCEMENTS
+# ============================================
+
+# AI/ML for Advanced Matching
+# transformers>=4.30.0
+# torch>=2.0.0
+
+# JSON Schema Validation
+# jsonschema>=4.17.0
+
+# Progress Bars (for bulk processing)
+# tqdm>=4.65.0
