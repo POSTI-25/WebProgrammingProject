@@ -1,26 +1,26 @@
-import React from 'react';
-import './Header.css';
+import "../header.css";
 
-const Header = () => {
+export default function Header() {
   return (
-    <header className="navbar">
-      <div className="navbar-logo">
-        <a href="/">
-          {/* Replace with your logo image path */}
-          <img src="/public/assets/logo.png" alt="Company Logo" />
-          <span className="logo-text">MyBrand</span>
-        </a>
+    <header className="main-header">
+
+      {/* Logo */}
+      <div className="logo">
+        <img
+          src="/assets/logo.png"
+          alt="ResumeAI Logo"
+          className="logo-img"
+        />
+        <span className="logo-text"></span>
       </div>
-      <nav className="navbar-links">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">Features</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/contact">About</a></li>
-        </ul>
+
+      {/* Navbar */}
+      <nav className="nav-links">
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
       </nav>
+
     </header>
   );
-};
-
-export default Header;
+}

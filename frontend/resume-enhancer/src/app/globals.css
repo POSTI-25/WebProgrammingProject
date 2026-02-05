@@ -45,3 +45,38 @@ a {
   background-color: #0a0a1a;
   height: 100vh;
 }
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  background-color: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px; /* Makes it a pill shape */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  font-weight: 500;
+  color: #333;
+}
+
+.back-button .arrow {
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #ffffff;
+  border-color: #007bff; /* Matches your header brand color */
+  color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.back-button:hover .arrow {
+  transform: translateX(-4px); /* Moves the arrow slightly left on hover */
+}
+
+.back-button:active {
+  transform: scale(0.98); /* Slight click feedback */
+}
