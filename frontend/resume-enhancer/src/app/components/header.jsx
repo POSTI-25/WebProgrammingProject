@@ -3,15 +3,14 @@ import "../header.css";
 export default function Header() {
   return (
     <header className="main-header">
-
+ 
       {/* Logo */}
       <div className="logo">
         <img
-          src="/assets/logo.png"
+          src="/assets/logo-removebg-preview.png"
           alt="ResumeAI Logo"
           className="logo-img"
         />
-        <span className="logo-text"></span>
       </div>
 
       {/* Navbar */}

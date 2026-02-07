@@ -7,8 +7,7 @@ function FileUpload() {
           <div> nfh
           <Header/>  
           </div>
-      File Upload Page
-    </div>
+    </div> 
     );
 }
 

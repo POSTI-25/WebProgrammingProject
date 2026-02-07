@@ -1,51 +1,28 @@
 .main-header {
-  height: 90px;
-  width: 100%;
-  padding: 0 60px;
-
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-
+  align-items: center; /* Center links vertically relative to the logo */
+  padding: 1px 20px;  /* Balanced breathing room */
+  background: transparent; /* Or your dark theme color */
 }
 
-/* Logo container */
 .logo {
   display: flex;
   align-items: center;
-  gap: 15px;
 }
 
-/* Logo square */
-.logo-box {
-  width: 55px;
-  height: 55px;
-
-  background-color: #00f6ff;
-  color: black;
-
-  font-size: 22px;
-  font-weight: bold;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 12px;
-}
-
-/* ResumeAI text */
-.logo-text {
-  font-size: 28px;
-  font-weight: 600;
-  color: #00f6ff;
+.logo-img {
+  height: 100px;       /* Control the size via height to maintain aspect ratio */
+  width: auto;        /* Let the width adjust automatically */
+  display: block;
 }
 
 /* Navbar links */
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 50px;
+  margin-bottom: 25px;
+  margin-right: 50px;
 }
 
 .nav-links a {
