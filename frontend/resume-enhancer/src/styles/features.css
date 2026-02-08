@@ -1,3 +1,7 @@
+body {
+  background-color: #0a0a1a;
+}
+
 /* Hero */
 .feat-hero {
   max-width: 800px; 
@@ -52,7 +56,7 @@
 
 .feat-hero-subtitle {
   font-size: 18px;
-  color: var(--re-text-secondary);
+  color: #ffffff;
   max-width: 560px;
   margin: 0 auto;
   line-height: 1.6;
@@ -134,19 +138,25 @@
 }
 
 .feat-card-icon {
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(0, 255, 200, 0.12));
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.2), rgba(0, 212, 255, 0.15));
   border-radius: var(--re-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.feat-card-icon .feat-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .feat-card-icon svg {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   stroke: var(--re-accent-cyan);
 }
 
@@ -167,7 +177,7 @@
 
 .feat-stat-label {
   font-size: 11px;
-  color: var(--re-text-muted);
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -176,12 +186,12 @@
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
-  color: var(--re-text-primary);
+  color: #ffffff;
 }
 
 .feat-card-desc {
   font-size: 14px;
-  color: var(--re-text-secondary);
+  color: #ffffff;
   line-height: 1.7;
 }
 
@@ -209,7 +219,7 @@
 .feat-section-subheading {
   text-align: center;
   font-size: 16px;
-  color: var(--re-text-muted);
+  color: #ffffff;
   margin-bottom: 60px;
 }
 
@@ -253,12 +263,12 @@
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: var(--re-text-primary);
+  color: #ffffff;
 }
 
 .feat-step-desc {
   font-size: 14px;
-  color: var(--re-text-secondary);
+  color: #ffffff;
   line-height: 1.6;
 }
 
@@ -299,7 +309,7 @@
   bottom: -60%;
   left: 50%;
   transform: translateX(-50%);
-  width: 120%;
+  width: 120%; 
   height: 80%;
   background: radial-gradient(ellipse, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
   pointer-events: none;
@@ -318,7 +328,7 @@
 
 .feat-cta-desc {
   font-size: 16px;
-  color: var(--re-text-secondary);
+  color: #ffffff;
   margin-bottom: 32px;
   max-width: 440px;
   margin-left: auto;
@@ -336,7 +346,7 @@
 
 .feat-footer-text {
   font-size: 13px;
-  color: var(--re-text-muted);
+  color: #ffffff;
 }
 
 /* Active Nav */

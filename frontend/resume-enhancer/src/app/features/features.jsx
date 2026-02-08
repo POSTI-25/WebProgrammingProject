@@ -5,9 +5,11 @@ import Header from '../../components/header.jsx';
 const features = [
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/ATS Compatibility Engine.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'ATS Compatibility Engine',
     description: 'Deep-scan your resume against 50+ applicant tracking systems. Our AI identifies formatting pitfalls, missing fields, and parsing errors that cause silent rejections.',
@@ -16,9 +18,11 @@ const features = [
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M7 7h.01M7 3h5a4 4 0 010 8h-1m4 4h.01M17 21h-5a4 4 0 010-8h1" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/Smart Keyword Optimization.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'Smart Keyword Optimization',
     description: 'Cross-reference your resume with industry-specific keyword databases. Automatically inject high-impact terms while maintaining natural, human-readable language.',
@@ -27,31 +31,37 @@ const features = [
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M4 6h16M4 12h16M4 18h7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/Intelligent Formatting.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'Intelligent Formatting',
-    description: 'Restructure your resume layout for optimal readability. Clean hierarchy, consistent spacing, and ATS-friendly structure — all handled automatically.',
+    description: 'Restructure your resume layout for optimal readability. Clean hierarchy, consistent spacing, and ATS-friendly structure - all handled automatically.',
     stat: '100%',
-    statLabel: 'Parse Rate',
+    statLabel: 'Parse Rate', 
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/Real-Time AI Analysis.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'Real-Time AI Analysis',
-    description: 'Get instant feedback as our AI scans your document. Watch live as improvements are identified, scored, and applied — no waiting, no guesswork.',
+    description: 'Get instant feedback as our AI scans your document. Watch live as improvements are identified, scored, and applied - no waiting, no guesswork.',
     stat: '<5s',
     statLabel: 'Scan Time',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/Achievement Amplifier.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'Achievement Amplifier',
     description: 'Transform vague responsibilities into quantified, impact-driven bullet points. Our AI rewrites your experience with powerful action verbs and measurable outcomes.',
@@ -60,12 +70,14 @@ const features = [
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img 
+        src="/assets/Performance Scoring.png" 
+        alt="Keyword Icon" 
+        className="feat-icon-img"
+      />
     ),
     title: 'Performance Scoring',
-    description: 'Get a comprehensive score breakdown across multiple dimensions — ATS compatibility, keyword density, formatting, and impact language — with actionable improvement paths.',
+    description: 'Get a comprehensive score breakdown across multiple dimensions - ATS compatibility, keyword density, formatting, and impact language - with actionable improvement paths.',
     stat: '88+',
     statLabel: 'Avg Score',
   },
@@ -75,12 +87,13 @@ const workflow = [
   { step: '01', title: 'Upload', description: 'Drop your PDF or DOCX resume into our secure uploader.' },
   { step: '02', title: 'Analyze', description: 'Our AI engine scans structure, keywords, and formatting in real-time.' },
   { step: '03', title: 'Enhance', description: 'Review highlighted improvements and an optimized version side-by-side.' },
-  { step: '04', title: 'Download', description: 'Export your enhanced resume — ready to land interviews.' },
+  { step: '04', title: 'Download', description: 'Export your enhanced resume - ready to land interviews.' },
 ];
 
 const Features = () => {
   return (
     <div className="resume-enhancer">
+    <div className='features-bg'>
 
       <Header />
 
@@ -95,7 +108,7 @@ const Features = () => {
           <span className="feat-hero-accent">Land the Interview</span>
         </h1>
         <p className="feat-hero-subtitle">
-          From ATS optimization to achievement rewriting — our AI handles every detail
+          From ATS optimization to achievement rewriting - our AI handles every detail
           so your resume speaks louder than the competition.
         </p>
       </section>
@@ -150,7 +163,7 @@ const Features = () => {
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
               <path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3" />
             </svg>
-            Get Started — It's Free
+            Get Started - It's Free
           </Link>
         </div>
       </section>
@@ -159,6 +172,7 @@ const Features = () => {
       <footer className="feat-footer">
         <p className="feat-footer-text">© 2026 ResumeAI. Built to get you hired.</p>
       </footer>
+    </div>
     </div>
   );
 };

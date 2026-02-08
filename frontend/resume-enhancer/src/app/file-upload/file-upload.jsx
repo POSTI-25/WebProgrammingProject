@@ -1,9 +1,10 @@
 import Header from '../../components/header.jsx';
+import '../../styles/file-upload.css';
 
 function FileUpload() {
     return (
         <div className="file-upload-bg">
-          <div> nfh
+          <div> 
           <Header/>  
           </div>
     </div> 
