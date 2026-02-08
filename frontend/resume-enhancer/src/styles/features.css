@@ -138,19 +138,19 @@ body {
 }
 
 .feat-card-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.2), rgba(0, 212, 255, 0.15));
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(139, 92, 246, 0.3), rgba(0, 212, 255, 0.2));
   border-radius: var(--re-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.4);
 }
 
 .feat-card-icon .feat-icon-img {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
 }
 
