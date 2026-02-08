@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from './components/header.jsx';
+import Header from '../../components/header.jsx';
 
 function FileUpload() {
     return (
@@ -8,7 +7,7 @@ function FileUpload() {
           <Header/>  
           </div>
     </div> 
-    );
+    ); 
 }
 
 export default FileUpload;

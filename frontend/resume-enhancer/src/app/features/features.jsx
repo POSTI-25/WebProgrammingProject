@@ -1,6 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/features.css';
+import Link from 'next/link';
+import '../../styles/features.css';
 
 const features = [
   {
@@ -79,19 +78,17 @@ const workflow = [
 ];
 
 const Features = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="resume-enhancer">
       <header className="re-header">
-        <div className="re-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        <Link href="/" className="re-logo" style={{ cursor: 'pointer', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
           <div className="re-logo-icon">RE</div>
           <span className="re-logo-text">ResumeAI</span>
-        </div>
+        </Link>
         <nav className="re-nav">
-          <a href="/features" className="re-nav-link re-nav-link--active">Features</a>
-          <a href="#" className="re-nav-link">Pricing</a>
-          <a href="#" className="re-nav-link">About</a>
+          <Link href="/features" className="re-nav-link re-nav-link--active">Features</Link>
+          <Link href="/pricing" className="re-nav-link">Pricing</Link>
+          <Link href="/about" className="re-nav-link">About</Link>
         </nav>
       </header>
 
@@ -156,13 +153,13 @@ const Features = () => {
           <p className="feat-cta-desc">
             Upload your resume and get an AI-enhanced version in under 30 seconds.
           </p>
-          <button className="re-upload-btn" onClick={() => navigate('/')}>
+          <Link href="/" className="re-upload-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
               <path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3" />
             </svg>
             Get Started — It's Free
-          </button>
+          </Link>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import FileUpload from "./file-upload";
+import FileUpload from "./file-upload/file-upload";
 
 export default function Home() {
   return (
