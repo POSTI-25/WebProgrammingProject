@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import '../../styles/features.css';
+import Header from '../../components/header.jsx';
 
 const features = [
   {
@@ -80,17 +81,8 @@ const workflow = [
 const Features = () => {
   return (
     <div className="resume-enhancer">
-      <header className="re-header">
-        <Link href="/" className="re-logo" style={{ cursor: 'pointer', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-          <div className="re-logo-icon">RE</div>
-          <span className="re-logo-text">ResumeAI</span>
-        </Link>
-        <nav className="re-nav">
-          <Link href="/features" className="re-nav-link re-nav-link--active">Features</Link>
-          <Link href="/pricing" className="re-nav-link">Pricing</Link>
-          <Link href="/about" className="re-nav-link">About</Link>
-        </nav>
-      </header>
+
+      <Header />
 
       {/* Hero Section */}
       <section className="feat-hero">
