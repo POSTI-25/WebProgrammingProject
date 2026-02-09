@@ -152,23 +152,23 @@ const Features = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="feat-cta-section">
-        <div className="feat-cta-card">
-          <h2 className="feat-cta-title">Ready to Optimize?</h2>
-          <p className="feat-cta-desc">
-            Upload your resume and get an AI-enhanced version in under 30 seconds.
-          </p>
-          <Link href="/" className="re-upload-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-              <path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3" />
-            </svg>
-            Get Started - It's Free
-          </Link>
-        </div>
-      </section>
+        <section className="feat-cta-section">
+          <div className="feat-cta-card">
+            <h2 className="feat-cta-title" style={{ color: 'white' }}>Ready to Optimize?</h2>
+            <p className="feat-cta-desc" style={{ color: 'white' }}>
+          Upload your resume and get an AI-enhanced version in under 30 seconds.
+            </p>
+            <Link href="/" className="re-upload-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'white' }}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ stroke: 'white' }}>
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+            <path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3" />
+          </svg>
+          Get Started - It's Free
+            </Link>
+          </div>
+        </section>
 
-      {/* Footer */}
+        {/* Footer */}
       <footer className="feat-footer">
         <p className="feat-footer-text">© 2026 ResumeAI. Built to get you hired.</p>
       </footer>

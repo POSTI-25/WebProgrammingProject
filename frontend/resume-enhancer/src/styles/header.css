@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center; /* Center links vertically relative to the logo */
-  padding: 1px 20px;  /* Balanced breathing room */
+  padding: 20px 20px;  /* Balanced breathing room */
   background: transparent; /* Or your dark theme color */
 }
 
