@@ -82,18 +82,23 @@ body {
 }
 
 .feat-card {
-  background: var(--re-glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--re-glass-border);
+  background: rgba(255, 255, 255, 0.06); /* more visible glass */
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15); /* brighter border */
+
   border-radius: var(--re-radius-lg);
   padding: 36px;
-  transition: var(--re-transition);
+
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.45),  /* depth */
+    0 0 0 1px rgba(255, 255, 255, 0.05); /* crisp outline */
+
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: featCardIn 0.5s ease-out forwards;
+  border-radius: 10px;
 }
 
 @keyframes featCardIn {
@@ -115,8 +120,10 @@ body {
 
 .feat-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(0, 212, 255, 0.25);
-  box-shadow: var(--re-shadow-card), var(--re-shadow-glow);
+  border-color: rgba(159, 214, 57, 0.25);
+box-shadow: 
+  0 4px 12px rgba(255, 255, 255, 0.15),
+  0 0 20px rgba(255, 255, 255, 0.25);
 }
 
 .feat-card-shimmer {
@@ -125,7 +132,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.03), transparent);
+  background: linear-gradient(90deg, transparent, rgba(160, 180, 47, 0.03), transparent);
   transition: left 0.6s ease;
   pointer-events: none;
 }
