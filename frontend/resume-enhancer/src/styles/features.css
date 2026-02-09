@@ -83,8 +83,8 @@ body {
 
 .feat-card {
   background: rgba(255, 255, 255, 0.06); /* more visible glass */
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   border: 1px solid rgba(255, 255, 255, 0.15); /* brighter border */
 
@@ -293,16 +293,39 @@ box-shadow:
 }
 
 .feat-cta-card {
-  background: var(--re-glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--re-glass-border);
-  border-radius: var(--re-radius-lg);
+  background: rgba(255, 255, 255, 0.05); /* brighter glass */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18); /* clearer border */
+  border-radius: 15px;
+
   padding: 64px 48px;
   text-align: center;
+
+  box-shadow: 
+    0 10px 26px rgba(0, 0, 0, 0.5),   /* depth */
+    0 0 0 1px rgba(255, 255, 255, 0.06); /* crisp outline */
+
   position: relative;
   overflow: hidden;
 }
+
+.feat-cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    circle at top,
+    rgba(255, 255, 255, 0.12),
+    transparent 65%
+  );
+
+  pointer-events: none;
+}
+
 
 .feat-cta-card::before {
   content: '';
