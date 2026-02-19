@@ -55,22 +55,22 @@ export default function FileUpload() {
         </p>
       </div>
 
-      {/* UPLOAD CARD */}
-      <div className="upload-card">
-        <div
-          className="upload-dropzone"
-          onClick={handleUploadClick}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-        >
-          <div className="upload-icon">
-            ⬆
-          </div>
+    {/* UPLOAD CARD */}
+        <div className="upload-card">
+          <div
+            className="upload-dropzone"
+            onClick={handleUploadClick}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+          >
+            <div className="upload-icon">
+            <img src="/assets/file-upload.png" alt="Upload" />
+            </div>
 
-          <p className="upload-text">Drag & drop your resume here</p>
-          <p className="upload-hint">or click to browse files</p>
+            <p className="upload-text">Drag & drop your resume here</p>
+            <p className="upload-hint">or click to browse files</p>
 
-          <button
+            <button
             className="upload-btn"
             onClick={(e) => {
               e.stopPropagation();
