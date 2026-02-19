@@ -92,13 +92,13 @@ export default function FileUpload() {
           {/* Show Selected File */}
           {fileName && (
             <p className="file-selected">
-              ✅ Selected: <span>{fileName}</span>
+              Selected: <span>{fileName}</span>
             </p>
           )}
         </div>
       </div>
 
-      {/* FACTORS SECTION */}
+      {/* Factors Section */}
       <div className="upload-factors">
         <div className="factor-box">
           <h3>ATS Score Analysis</h3>

@@ -1,7 +1,3 @@
-/* ========================================
-   GLOBAL BACKGROUND
-======================================== */
-
 .file-upload-bg {
   min-height: 100vh;
   background-color: #0a0a1a;
@@ -10,10 +6,6 @@
   position: relative;
   overflow-x: hidden;
 }
-
-/* ========================================
-   HERO SECTION
-======================================== */
 
 .upload-hero {
   max-width: 800px;
@@ -46,10 +38,6 @@
   margin: 0 auto;
   line-height: 1.6;
 }
-
-/* ========================================
-   UPLOAD CARD (Glass style like feat-card)
-======================================== */
 
 .upload-card {
   display: flex;
@@ -121,10 +109,6 @@
     0 0 60px rgba(0, 255, 255, 0.15);
 }
 
-/* ========================================
-   UPLOAD CONTENT
-======================================== */
-
 .upload-icon {
   width: 90px;
   height: 90px;
@@ -160,10 +144,6 @@
   opacity: 0.7;
 }
 
-/* ========================================
-   BUTTON (Match features gradient badge)
-======================================== */
-
 .upload-btn {
   margin-top: 30px;
   padding: 14px 40px;
@@ -187,10 +167,6 @@
   box-shadow: 0 0 25px rgba(22, 255, 175, 0.7);
 }
 
-/* ========================================
-   FILE NAME DISPLAY
-======================================== */
-
 .file-selected {
   margin-top: 20px;
   font-size: 14px;
@@ -198,20 +174,16 @@
   font-weight: 500;
 }
 
-/* ========================================
-   FACTOR CARDS (same as feat-card)
-======================================== */
-
 .upload-factors {
   max-width: 1200px;
-  margin: 100px auto 140px; /* increased bottom space */
+  margin: 100px auto 140px; 
   padding: 0 24px;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 
-  text-align: center; /* center content */
+  text-align: center; 
 }
 
 
@@ -270,9 +242,6 @@
   line-height: 1.7;
   opacity: 0.85;
 }
-/* ========================================
-   RESPONSIVE
-======================================== */
 
 @media (max-width: 1024px) {
   .upload-factors {
