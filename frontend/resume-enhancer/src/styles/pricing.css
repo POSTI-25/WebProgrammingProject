@@ -1,0 +1,289 @@
+/* ===== PRICING PAGE ===== */
+
+.pricing-hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-hero-subtitle {
+  font-size: 18px;
+  color: var(--re-text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Plans Grid */
+.pricing-plans-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.pricing-plan-card {
+  background: var(--re-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--re-glass-border);
+  border-radius: var(--re-radius-lg);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: featCardIn 0.5s ease-out forwards;
+  transition: var(--re-transition);
+}
+
+.pricing-plan-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.pricing-plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--re-shadow-card), var(--re-shadow-glow);
+}
+
+/* Popular card */
+.pricing-plan-card--popular {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 60px rgba(0, 212, 255, 0.1);
+}
+
+.pricing-plan-card--popular::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+}
+
+.pricing-popular-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 14px;
+  background: var(--re-accent-gradient);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--re-bg-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pricing-plan-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--re-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.pricing-plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pricing-price-value {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.pricing-price-period {
+  font-size: 16px;
+  color: var(--re-text-muted);
+  font-weight: 500;
+}
+
+.pricing-plan-desc {
+  font-size: 14px;
+  color: var(--re-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* Feature list */
+.pricing-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pricing-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--re-text-secondary);
+}
+
+.pricing-check-icon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--re-accent-teal);
+  flex-shrink: 0;
+}
+
+/* CTA Buttons */
+.pricing-cta-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: var(--re-radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--re-transition);
+  border: 1px solid var(--re-glass-border);
+  background: transparent;
+  color: var(--re-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.pricing-cta-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.pricing-cta-btn--primary {
+  background: var(--re-accent-gradient);
+  border: none;
+  color: var(--re-bg-dark);
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.3);
+}
+
+.pricing-cta-btn--primary:hover {
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+  background: var(--re-accent-gradient);
+}
+
+/* FAQ */
+.pricing-faq-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.pricing-faq-card {
+  background: var(--re-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--re-glass-border);
+  border-radius: var(--re-radius-md);
+  padding: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: featCardIn 0.5s ease-out forwards;
+}
+
+.pricing-faq-q {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--re-text-primary);
+  margin-bottom: 10px;
+}
+
+.pricing-faq-a {
+  font-size: 14px;
+  color: var(--re-text-secondary);
+  line-height: 1.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .pricing-plans-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-hero-title {
+    font-size: 36px;
+  }
+
+  .pricing-faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== CTA BUTTON FIX (ADDED) ===== */
+.re-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 28px;
+  border-radius: var(--re-radius-sm);
+
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  border: none;
+
+  background: var(--re-accent-gradient);
+  color: var(--re-bg-dark);
+
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.25);
+  transition: var(--re-transition);
+}
+
+.re-upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+}
+
+.re-upload-btn:active {
+  transform: scale(0.97);
+}

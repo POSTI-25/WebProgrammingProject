@@ -1,0 +1,227 @@
+/* ===== ABOUT PAGE ===== */
+
+.about-hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-hero-subtitle {
+  font-size: 18px;
+  color: var(--re-text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Stats */
+.about-stats-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.about-stat-card {
+  background: var(--re-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--re-glass-border);
+  border-radius: var(--re-radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: featCardIn 0.5s ease-out forwards;
+}
+
+.about-stat-value {
+  font-size: 40px;
+  font-weight: 700;
+  background: var(--re-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.about-stat-label {
+  font-size: 13px;
+  color: var(--re-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* Values */
+.about-values-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-value-card {
+  background: var(--re-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--re-glass-border);
+  border-radius: var(--re-radius-lg);
+  padding: 36px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: featCardIn 0.5s ease-out forwards;
+  transition: var(--re-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.about-value-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.25);
+  box-shadow: var(--re-shadow-card), var(--re-shadow-glow);
+}
+
+/* Team */
+.about-team-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-team-card {
+  background: var(--re-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--re-glass-border);
+  border-radius: var(--re-radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: featCardIn 0.5s ease-out forwards;
+  transition: var(--re-transition);
+}
+
+.about-team-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 212, 255, 0.2);
+  box-shadow: var(--re-shadow-card), var(--re-shadow-glow);
+}
+
+.about-team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--re-accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--re-bg-dark);
+  margin: 0 auto 20px;
+}
+
+.about-team-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--re-text-primary);
+  margin-bottom: 4px;
+}
+
+.about-team-role {
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--re-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.about-team-bio {
+  font-size: 14px;
+  color: var(--re-text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero-title {
+    font-size: 36px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-team-grid {
+    grid-template-columns: 1fr;
+  }
+}
