@@ -7,6 +7,10 @@ import "../../styles/file-upload.css";
 export default function FileUpload() {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [parsedData, setParsedData] = useState(null);
 
   // Open file picker
   const handleUploadClick = () => {
@@ -18,8 +22,10 @@ export default function FileUpload() {
     const file = event.target.files[0];
 
     if (file) {
+      setSelectedFile(file);
       setFileName(file.name);
-      console.log("Uploaded file:", file);
+      setErrorMessage("");
+      setParsedData(null);
     }
   };
 
@@ -30,13 +36,49 @@ export default function FileUpload() {
     const file = event.dataTransfer.files[0];
 
     if (file) {
+      setSelectedFile(file);
       setFileName(file.name);
-      console.log("Dropped file:", file);
+      setErrorMessage("");
+      setParsedData(null);
     }
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
+  };
+
+  const handleParseDocument = async () => {
+    if (!selectedFile) {
+      setErrorMessage("Please select a file first.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage("");
+    setParsedData(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      const response = await fetch("http://127.0.0.1:8000/api/parse-document", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        setErrorMessage(result.message || "Failed to parse document.");
+        return;
+      }
+
+      setParsedData(result.data);
+    } catch {
+      setErrorMessage("Could not connect to backend. Make sure API is running.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -94,6 +136,23 @@ export default function FileUpload() {
             <p className="file-selected">
               Selected: <span>{fileName}</span>
             </p>
+          )}
+
+          <button
+            className="upload-btn"
+            type="button"
+            onClick={handleParseDocument}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Parsing..." : "Parse Resume"}
+          </button>
+
+          {errorMessage && <p className="file-selected">Error: {errorMessage}</p>}
+
+          {parsedData && (
+            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+              {JSON.stringify(parsedData, null, 2)}
+            </pre>
           )}
         </div>
       </div>
