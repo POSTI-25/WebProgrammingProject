@@ -242,10 +242,16 @@
 }
 
 .pricing-faq-q {
+  display: inline-block;
   font-size: 16px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.95);
-  margin-bottom: 10px;
+  font-weight: 700;
+  color: #07121a; /* dark text for contrast on bright gradient */
+  margin-bottom: 14px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00f0f0 0%, #34fd9b 100%);
+  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.18), 0 0 40px rgba(52,253,155,0.06), inset 0 1px 0 rgba(255,255,255,0.12);
+  line-height: 1;
 }
 
 .pricing-faq-a {
