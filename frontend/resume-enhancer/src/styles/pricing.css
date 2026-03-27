@@ -164,37 +164,54 @@
 }
 
 /* CTA Buttons */
-.pricing-cta-btn {
-  width: 100%;
-  padding: 14px 24px;
+.pricing-cta-btn,
+.pricing-cta-btn--primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto; /* size to fit text like .re-upload-btn */
+  margin: 0 auto;
+  padding: 12px 28px;
   border-radius: var(--re-radius-sm);
+
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: var(--re-transition);
-  border: 1px solid var(--re-glass-border);
-  background: transparent;
+  border: none;
+
+  background: var(--re-accent-gradient);
   color: rgba(255,255,255,0.95);
-  letter-spacing: -0.02em;
+
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.25);
+  transition: var(--re-transition);
 }
 
-.pricing-cta-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
+.pricing-cta-btn:hover,
+.pricing-cta-btn--primary:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
 }
 
 .pricing-cta-btn--primary {
-  background: var(--re-accent-gradient);
-  border: none;
-  color: rgba(255,255,255,0.95);
-  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.3);
+  /* Stronger emphasis for the popular plan: very sharp rim + big spread */
+  background: rgba(6,8,12,0.98);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.99);
+  box-shadow:
+    0 14px 40px rgba(0,212,255,0.28),
+    0 0 140px rgba(0,212,255,0.34),
+    0 0 36px 14px rgba(0,212,255,0.4);
 }
 
 .pricing-cta-btn--primary:hover {
-  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
-  background: var(--re-accent-gradient);
+  transform: translateY(-5px);
+  box-shadow:
+    0 24px 80px rgba(0,212,255,0.32),
+    0 0 220px rgba(0,212,255,0.44),
+    0 0 64px 20px rgba(0,212,255,0.48);
 }
 
 /* FAQ */
@@ -261,8 +278,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: auto; /* size to fit text */
+  margin: 0 auto; /* center when used as block-level visual */
+  box-sizing: border-box;
 
-  padding: 14px 28px;
+  padding: 12px 36px;
   border-radius: var(--re-radius-sm);
 
   font-family: 'Inter', sans-serif;
@@ -286,4 +306,19 @@
 
 .re-upload-btn:active {
   transform: scale(0.97);
+}
+
+/* Ensure buttons inside plan cards are centered and spaced without affecting other text */
+.pricing-plan-card > .pricing-cta-btn,
+.pricing-plan-card > .re-upload-btn {
+  display: block; /* make block so margin auto centers reliably */
+  width: auto;
+  margin: 18px auto 0;
+  text-align: center;
+}
+
+/* Hero CTA specific adjustments to center reliably */
+.feat-cta-card .re-upload-btn {
+  display: inline-block; /* keep compact, center via margin */
+  margin: 18px auto 0;
 }

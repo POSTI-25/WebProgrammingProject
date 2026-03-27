@@ -149,7 +149,7 @@ const Pricing = () => {
               </ul>
 
               <button
-                className={`pricing-cta-btn ${plan.popular ? 'pricing-cta-btn--primary' : ''}`}
+                className={plan.popular ? 're-upload-btn' : 'pricing-cta-btn'}
                 onClick={() => router.push('/')}
               >
                 {plan.cta}
