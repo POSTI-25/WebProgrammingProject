@@ -23,7 +23,7 @@
 
 .pricing-hero-subtitle {
   font-size: 18px;
-  color: var(--re-text-secondary);
+  color: rgba(255,255,255,0.95);
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
@@ -102,7 +102,7 @@
 .pricing-plan-name {
   font-size: 16px;
   font-weight: 600;
-  color: var(--re-text-secondary);
+  color: rgba(255,255,255,0.95);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 16px;
@@ -127,13 +127,13 @@
 
 .pricing-price-period {
   font-size: 16px;
-  color: var(--re-text-muted);
+  color: rgba(255,255,255,0.85);
   font-weight: 500;
 }
 
 .pricing-plan-desc {
   font-size: 14px;
-  color: var(--re-text-secondary);
+  color: rgba(255,255,255,0.9);
   line-height: 1.6;
   margin-bottom: 28px;
 }
@@ -153,7 +153,7 @@
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  color: var(--re-text-secondary);
+  color: rgba(255,255,255,0.9);
 }
 
 .pricing-check-icon {
@@ -175,7 +175,7 @@
   transition: var(--re-transition);
   border: 1px solid var(--re-glass-border);
   background: transparent;
-  color: var(--re-text-primary);
+  color: rgba(255,255,255,0.95);
   letter-spacing: -0.02em;
 }
 
@@ -188,7 +188,7 @@
 .pricing-cta-btn--primary {
   background: var(--re-accent-gradient);
   border: none;
-  color: var(--re-bg-dark);
+  color: rgba(255,255,255,0.95);
   box-shadow: 0 4px 24px rgba(0, 212, 255, 0.3);
 }
 
@@ -227,13 +227,13 @@
 .pricing-faq-q {
   font-size: 16px;
   font-weight: 600;
-  color: var(--re-text-primary);
+  color: rgba(255,255,255,0.95);
   margin-bottom: 10px;
 }
 
 .pricing-faq-a {
   font-size: 14px;
-  color: var(--re-text-secondary);
+  color: rgba(255,255,255,0.9);
   line-height: 1.7;
 }
 
@@ -273,7 +273,7 @@
   border: none;
 
   background: var(--re-accent-gradient);
-  color: var(--re-bg-dark);
+  color: rgba(255,255,255,0.95);
 
   box-shadow: 0 4px 24px rgba(0, 212, 255, 0.25);
   transition: var(--re-transition);
