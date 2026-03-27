@@ -11,6 +11,7 @@ export default function FileUpload() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [parsedData, setParsedData] = useState(null);
+  const [debugData, setDebugData] = useState(null);
 
   // Open file picker
   const handleUploadClick = () => {
@@ -26,6 +27,7 @@ export default function FileUpload() {
       setFileName(file.name);
       setErrorMessage("");
       setParsedData(null);
+      setDebugData(null);
     }
   };
 
@@ -40,6 +42,7 @@ export default function FileUpload() {
       setFileName(file.name);
       setErrorMessage("");
       setParsedData(null);
+      setDebugData(null);
     }
   };
 
@@ -56,12 +59,13 @@ export default function FileUpload() {
     setIsSubmitting(true);
     setErrorMessage("");
     setParsedData(null);
+    setDebugData(null);
 
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("http://127.0.0.1:8000/api/parse-document", {
+      const response = await fetch("http://127.0.0.1:8000/api/parse-document?debug=true", {
         method: "POST",
         body: formData,
       });
@@ -69,13 +73,14 @@ export default function FileUpload() {
       const result = await response.json();
 
       if (!result.ok) {
-        setErrorMessage(result.message || "Failed to parse document.");
+        setErrorMessage("Processing failed. Check backend terminal logs.");
         return;
       }
 
       setParsedData(result.data);
+      setDebugData(result.debug || null);
     } catch {
-      setErrorMessage("Could not connect to backend. Make sure API is running.");
+      setErrorMessage("Could not connect to backend.");
     } finally {
       setIsSubmitting(false);
     }
@@ -141,17 +146,32 @@ export default function FileUpload() {
           <button
             className="upload-btn"
             type="button"
-            onClick={handleParseDocument}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleParseDocument();
+            }}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Parsing..." : "Parse Resume"}
           </button>
 
-          {errorMessage && <p className="file-selected">Error: {errorMessage}</p>}
+          {errorMessage && <p className="file-selected">{errorMessage}</p>}
 
           {parsedData && (
             <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
               {JSON.stringify(parsedData, null, 2)}
+            </pre>
+          )}
+
+          {debugData?.raw_text && (
+            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+              Raw Extracted Text:\n{debugData.raw_text}
+            </pre>
+          )}
+
+          {debugData?.gemini_raw && (
+            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+              Raw Gemini Output:\n{debugData.gemini_raw}
             </pre>
           )}
         </div>
