@@ -130,28 +130,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="about-team-section">
-        <h2 className="feat-section-heading">The Team</h2>
-        <p className="feat-section-subheading">Small team, big mission</p>
-
-        <div className="about-team-grid">
-          {team.map((member, i) => (
-            <div key={i} className="about-team-card">
-              <div className="about-team-avatar">
-                {member.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
-              </div>
-
-              <h3 className="about-team-name">{member.name}</h3>
-              <span className="about-team-role">{member.role}</span>
-              <p className="about-team-bio">{member.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Team section removed (content was placeholder/fake) */}
 
       {/* CTA */}
       <section className="feat-cta-section">
