@@ -2,18 +2,24 @@
 
 import logging
 from pathlib import Path
+from typing import Any, Dict, List
+from uuid import uuid4
 
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from extractors.docx_extractor import extract_doc_text
 from extractors.pdf_extractor import extract_pdf_text
-from models.model import structure_with_gemini_verbose
+from models.model import enhance_with_groq_once, structure_with_gemini
 
 
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Resume Parser API")
+
+# One-session in-memory store. Key: document_id, Value: structured/enhanced resume JSON.
+DOCUMENT_STORE: Dict[str, Dict[str, Any]] = {}
 
 app.add_middleware(
 	CORSMiddleware,
@@ -29,8 +35,13 @@ def health_check():
 	return {"ok": True}
 
 
+class EnhanceRequest(BaseModel):
+	document_id: str
+	selected_options: List[str]
+
+
 @app.post("/api/parse-document")
-async def parse_document(file: UploadFile = File(None), debug: bool = False):
+async def parse_document(file: UploadFile = File(None)):
 	if file is None:
 		logger.warning("parse_document called without file")
 		return {"ok": False, "error": "file_missing", "message": "No file uploaded"}
@@ -75,30 +86,56 @@ async def parse_document(file: UploadFile = File(None), debug: bool = False):
 		}
 
 	try:
-		llm_result = structure_with_gemini_verbose(raw_text)
-		structured_data = llm_result["parsed"]
-		gemini_raw = llm_result.get("raw_response", "")
+		structured_data = structure_with_gemini(raw_text)
 	except Exception:
 		logger.exception("LLM processing failed")
-		error_response = {
+		return {
 			"ok": False,
 			"error": "llm_failed",
 			"message": "LLM processing failed. Check backend logs.",
 		}
-		if debug:
-			error_response["debug"] = {
-				"raw_text": raw_text,
-			}
-		return error_response
 
-	response = {"ok": True, "data": structured_data}
-	if debug:
-		response["debug"] = {
-			"raw_text": raw_text,
-			"gemini_raw": gemini_raw,
+	document_id = str(uuid4())
+	DOCUMENT_STORE[document_id] = structured_data
+
+	return {"ok": True, "document_id": document_id}
+
+
+@app.post("/api/enhance-document")
+def enhance_document(payload: EnhanceRequest):
+	document_id = payload.document_id.strip()
+	if not document_id:
+		return {
+			"ok": False,
+			"error": "document_id_missing",
+			"message": "document_id is required",
 		}
 
-	return response
+	if document_id not in DOCUMENT_STORE:
+		return {
+			"ok": False,
+			"error": "document_not_found",
+			"message": "Document not found in current session",
+		}
+
+	structured_json = DOCUMENT_STORE[document_id]
+
+	try:
+		enhanced_json = enhance_with_groq_once(structured_json, payload.selected_options)
+	except Exception:
+		logger.exception("Enhancement failed for document_id=%s", document_id)
+		return {
+			"ok": False,
+			"error": "enhancement_failed",
+			"message": "Enhancement failed. Check backend logs.",
+		}
+
+	DOCUMENT_STORE[document_id] = enhanced_json
+	return {
+		"ok": True,
+		"document_id": document_id,
+		"data": enhanced_json,
+	}
 
 
 

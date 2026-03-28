@@ -4,14 +4,23 @@ import React, { useRef, useState } from "react";
 import Header from "../../components/header.jsx";
 import "../../styles/file-upload.css";
 
+const ENHANCEMENT_OPTIONS = [
+  "ATS Compatibility",
+  "Grammar & Style Fixes",
+  "Keyword Optimization",
+  "Soft Skills Integration",
+];
+
 export default function FileUpload() {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [parsedData, setParsedData] = useState(null);
-  const [debugData, setDebugData] = useState(null);
+  const [documentId, setDocumentId] = useState("");
+  const [currentStep, setCurrentStep] = useState("upload");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [enhancedData, setEnhancedData] = useState(null);
 
   // Open file picker
   const handleUploadClick = () => {
@@ -26,8 +35,10 @@ export default function FileUpload() {
       setSelectedFile(file);
       setFileName(file.name);
       setErrorMessage("");
-      setParsedData(null);
-      setDebugData(null);
+      setDocumentId("");
+      setCurrentStep("upload");
+      setSelectedOptions([]);
+      setEnhancedData(null);
     }
   };
 
@@ -41,8 +52,10 @@ export default function FileUpload() {
       setSelectedFile(file);
       setFileName(file.name);
       setErrorMessage("");
-      setParsedData(null);
-      setDebugData(null);
+      setDocumentId("");
+      setCurrentStep("upload");
+      setSelectedOptions([]);
+      setEnhancedData(null);
     }
   };
 
@@ -58,14 +71,13 @@ export default function FileUpload() {
 
     setIsSubmitting(true);
     setErrorMessage("");
-    setParsedData(null);
-    setDebugData(null);
+    setEnhancedData(null);
 
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("http://127.0.0.1:8000/api/parse-document?debug=true", {
+      const response = await fetch("http://127.0.0.1:8000/api/parse-document", {
         method: "POST",
         body: formData,
       });
@@ -77,8 +89,58 @@ export default function FileUpload() {
         return;
       }
 
-      setParsedData(result.data);
-      setDebugData(result.debug || null);
+      setDocumentId(result.document_id);
+      setCurrentStep("enhance");
+    } catch {
+      setErrorMessage("Could not connect to backend.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const toggleOption = (option) => {
+    setSelectedOptions((prev) =>
+      prev.includes(option)
+        ? prev.filter((item) => item !== option)
+        : [...prev, option]
+    );
+  };
+
+  const handleEnhanceDocument = async () => {
+    if (!documentId) {
+      setErrorMessage("Missing document id. Please upload again.");
+      return;
+    }
+
+    if (selectedOptions.length === 0) {
+      setErrorMessage("Please select at least one enhancement option.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/enhance-document", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          document_id: documentId,
+          selected_options: selectedOptions,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        setErrorMessage(result.message || "Enhancement failed.");
+        return;
+      }
+
+      setEnhancedData(result.data);
+      setCurrentStep("result");
     } catch {
       setErrorMessage("Could not connect to backend.");
     } finally {
@@ -143,35 +205,56 @@ export default function FileUpload() {
             </p>
           )}
 
-          <button
-            className="upload-btn"
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleParseDocument();
-            }}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Parsing..." : "Parse Resume"}
-          </button>
+          {currentStep === "upload" && (
+            <button
+              className="upload-btn"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleParseDocument();
+              }}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Parsing..." : "Parse Resume"}
+            </button>
+          )}
+
+          {currentStep === "enhance" && (
+            <div
+              className="enhancement-options"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className="enhancement-title">Select Enhancements</p>
+
+              <div className="enhancement-grid">
+                {ENHANCEMENT_OPTIONS.map((option) => (
+                  <label key={option} className="enhancement-option">
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.includes(option)}
+                      onChange={() => toggleOption(option)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+
+              <button
+                className="upload-btn"
+                type="button"
+                onClick={handleEnhanceDocument}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Enhancing..." : "Enhance Resume"}
+              </button>
+            </div>
+          )}
 
           {errorMessage && <p className="file-selected">{errorMessage}</p>}
 
-          {parsedData && (
+          {currentStep === "result" && enhancedData && (
             <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              {JSON.stringify(parsedData, null, 2)}
-            </pre>
-          )}
-
-          {debugData?.raw_text && (
-            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              Raw Extracted Text:\n{debugData.raw_text}
-            </pre>
-          )}
-
-          {debugData?.gemini_raw && (
-            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              Raw Gemini Output:\n{debugData.gemini_raw}
+              {JSON.stringify(enhancedData, null, 2)}
             </pre>
           )}
         </div>
