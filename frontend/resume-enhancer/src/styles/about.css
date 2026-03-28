@@ -21,6 +21,18 @@
   background-clip: text;
 }
 
+/* Apply the white gradient only to elements that blended with the background */
+.resume-enhancer .about-hero-subtitle,
+.resume-enhancer .about-stat-label,
+.resume-enhancer .about-team-bio,
+.resume-enhancer .about-team-role {
+  background-image: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 .about-hero-subtitle {
   font-size: 18px;
   color: var(--re-text-secondary);
@@ -106,6 +118,16 @@
   transition: var(--re-transition);
   position: relative;
   overflow: hidden;
+}
+
+/* Increase space between the logo placeholder and text for readability */
+.about-values-grid .feat-card-icon {
+  margin-bottom: 22px; /* larger gap below icon; keep original alignment */
+}
+
+.about-values-grid .feat-card-title {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .about-value-card::before {
