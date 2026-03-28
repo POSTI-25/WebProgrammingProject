@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Header from "../../components/header.jsx";
 import "../../styles/file-upload.css";
 
@@ -11,16 +11,61 @@ const ENHANCEMENT_OPTIONS = [
   "Soft Skills Integration",
 ];
 
+const PARSING_MESSAGES = [
+  "Analyzing your resume...",
+  "Extracting content...",
+  "Structuring data...",
+];
+
+const ENHANCEMENT_MESSAGE_MAP = {
+  "ATS Compatibility": "Improving ATS compatibility...",
+  "Grammar & Style Fixes": "Refining content...",
+  "Keyword Optimization": "Optimizing keywords...",
+  "Soft Skills Integration": "Strengthening soft skills...",
+};
+
 export default function FileUpload() {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isParsing, setIsParsing] = useState(false);
+  const [isEnhancing, setIsEnhancing] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [documentId, setDocumentId] = useState("");
   const [currentStep, setCurrentStep] = useState("upload");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [enhancedData, setEnhancedData] = useState(null);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+
+  const enhancementMessages = useMemo(() => {
+    if (selectedOptions.length === 0) {
+      return [
+        "Improving ATS compatibility...",
+        "Refining content...",
+        "Optimizing keywords...",
+      ];
+    }
+
+    return selectedOptions.map(
+      (option) => ENHANCEMENT_MESSAGE_MAP[option] || "Enhancing your resume..."
+    );
+  }, [selectedOptions]);
+
+  const activeLoadingMessages = isParsing ? PARSING_MESSAGES : enhancementMessages;
+
+  useEffect(() => {
+    if (!isParsing && !isEnhancing) {
+      setLoadingMessageIndex(0);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setLoadingMessageIndex((prev) => (prev + 1) % activeLoadingMessages.length);
+    }, 1700);
+
+    return () => clearInterval(interval);
+  }, [isParsing, isEnhancing, activeLoadingMessages.length]);
 
   // Open file picker
   const handleUploadClick = () => {
@@ -70,6 +115,7 @@ export default function FileUpload() {
     }
 
     setIsSubmitting(true);
+    setIsParsing(true);
     setErrorMessage("");
     setEnhancedData(null);
 
@@ -94,6 +140,7 @@ export default function FileUpload() {
     } catch {
       setErrorMessage("Could not connect to backend.");
     } finally {
+      setIsParsing(false);
       setIsSubmitting(false);
     }
   };
@@ -118,6 +165,7 @@ export default function FileUpload() {
     }
 
     setIsSubmitting(true);
+    setIsEnhancing(true);
     setErrorMessage("");
 
     try {
@@ -144,6 +192,7 @@ export default function FileUpload() {
     } catch {
       setErrorMessage("Could not connect to backend.");
     } finally {
+      setIsEnhancing(false);
       setIsSubmitting(false);
     }
   };
@@ -151,6 +200,28 @@ export default function FileUpload() {
   return (
     <div className="file-upload-bg">
       <Header />
+
+      {(isParsing || isEnhancing) && (
+        <div className="processing-overlay" aria-live="polite" aria-busy="true">
+          <div className="processing-card">
+            <div className="processing-spinner" />
+
+            <p className="processing-stage">
+              {isParsing ? "Parsing Resume" : "Applying Enhancements"}
+            </p>
+
+            <p className="processing-message">
+              {activeLoadingMessages[loadingMessageIndex]}
+            </p>
+
+            <div className="processing-dots" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* HERO SECTION */}
       <div className="upload-hero">
@@ -185,6 +256,7 @@ export default function FileUpload() {
               e.stopPropagation();
               handleUploadClick();
             }}
+            disabled={isSubmitting}
           >
             Upload PDF/DOCX
           </button>

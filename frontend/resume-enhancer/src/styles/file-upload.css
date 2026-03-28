@@ -7,6 +7,122 @@
   overflow-x: hidden;
 }
 
+.processing-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 8, 18, 0.58);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.processing-card {
+  width: min(92vw, 520px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, rgba(17, 20, 42, 0.96) 0%, rgba(10, 14, 28, 0.96) 100%);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.4),
+    0 0 42px rgba(18, 216, 250, 0.16);
+  padding: 28px 26px;
+  text-align: center;
+  animation: processingFadeIn 260ms ease-out;
+}
+
+.processing-spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  margin: 0 auto 16px;
+  border: 3px solid rgba(255, 255, 255, 0.14);
+  border-top-color: #12d8fa;
+  border-right-color: #16ffaf;
+  animation: processingSpin 900ms linear infinite;
+}
+
+.processing-stage {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.processing-message {
+  margin: 10px 0 12px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #ffffff;
+  animation: processingPulse 1.7s ease-in-out infinite;
+}
+
+.processing-dots {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.processing-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #12d8fa 0%, #16ffaf 100%);
+  animation: processingDot 1.2s ease-in-out infinite;
+}
+
+.processing-dots span:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.processing-dots span:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+@keyframes processingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes processingPulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes processingDot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes processingFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .upload-hero {
   max-width: 800px;
   margin: 0 auto;
@@ -296,6 +412,14 @@
 
   .enhancement-grid {
     grid-template-columns: 1fr;
+  }
+
+  .processing-card {
+    padding: 24px 18px;
+  }
+
+  .processing-message {
+    font-size: 17px;
   }
 
 .upload-dropzone {
