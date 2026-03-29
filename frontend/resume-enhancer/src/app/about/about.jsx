@@ -6,43 +6,19 @@ import '../../styles/about.css';
 
 const values = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path
-          d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: <img src="/assets/ai.png" alt="AI-First Approach icon" className="feat-icon-img" />,
     title: 'AI-First Approach',
     description:
       'Every feature is built on cutting-edge machine learning models trained specifically for resume optimization and ATS compatibility.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path
-          d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: <img src="/assets/privacy.png" alt="Privacy by Design icon" className="feat-icon-img" />,
     title: 'Privacy by Design',
     description:
       'Your resume data is encrypted end-to-end. We never store your documents longer than needed and never share them with third parties.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
-        <path
-          d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: <img src="/assets/everyone.png" alt="Built for Everyone icon" className="feat-icon-img" />,
     title: 'Built for Everyone',
     description:
       "Whether you're a fresh graduate or a seasoned executive, our AI adapts to your experience level and industry to deliver tailored results.",
