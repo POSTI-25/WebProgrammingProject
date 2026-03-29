@@ -60,7 +60,7 @@ const plans = [
 const faqs = [
   { 
     q: 'Can I cancel anytime?', 
-    a: 'Yes — no contracts, no cancellation fees. You can downgrade or cancel your plan at any time from your account settings.' 
+    a: 'Yes - no contracts, no cancellation fees. You can downgrade or cancel your plan at any time from your account settings.' 
   },
   { 
     q: 'What file formats are supported?', 
@@ -72,7 +72,7 @@ const faqs = [
   },
   { 
     q: 'How does the free trial work?', 
-    a: "The Pro plan includes a 7-day free trial. No credit card required to start — upgrade only when you're ready." 
+    a: "The Pro plan includes a 7-day free trial. No credit card required to start - upgrade only when you're ready." 
   },
 ];
 
@@ -191,14 +191,14 @@ const Pricing = () => {
           </h2>
 
           <p className="feat-cta-desc">
-            Try ResumeAI free — no credit card required.
+            Try ResumeAI free - no credit card required.
           </p>
 
           <button
             className="re-upload-btn"
             onClick={() => router.push('/')}
           >
-            Get Started — It's Free
+            Get Started - It's Free
           </button>
         </div>
       </section>
