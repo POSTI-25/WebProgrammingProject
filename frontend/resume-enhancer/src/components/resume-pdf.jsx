@@ -14,18 +14,18 @@ const C = {
   navyDark:   "#0d2137",   // deep navy for header bg
   navyMid:    "#1a3a56",   // slightly lighter for gradient feel
   white:      "#ffffff",
-  headerSub:  "#90bcd8",   // muted sky blue — contact text in header
+  headerSub:  "#90bcd8",   // muted sky blue - contact text in header
 
   // Body palette
-  teal:       "#0096b2",   // vivid teal — section labels, accent line, chip text
-  tealLight:  "#e0f5f9",   // very light teal — skill chip background
-  tealMid:    "#b2dfe9",   // medium teal — chip border
+  teal:       "#0096b2",   // vivid teal - section labels, accent line, chip text
+  tealLight:  "#e0f5f9",   // very light teal - skill chip background
+  tealMid:    "#b2dfe9",   // medium teal - chip border
   bodyBg:     "#ffffff",
 
   // Typography
-  bodyDark:   "#1c2b39",   // near-black — primary body text
-  bodyMid:    "#3e5468",   // dark-blue-grey — subtitles, companies
-  bodyLight:  "#6e8ca0",   // muted — dates, secondary labels
+  bodyDark:   "#1c2b39",   // near-black - primary body text
+  bodyMid:    "#3e5468",   // dark-blue-grey - subtitles, companies
+  bodyLight:  "#6e8ca0",   // muted - dates, secondary labels
   ruleLine:   "#d0e6ef",   // very subtle teal-tinted divider
 };
 
@@ -439,7 +439,7 @@ export function ResumePDF({ data }) {
                   }
                 }
 
-                // 3. Final fallback — scan ALL values in the project object
+                // 3. Final fallback - scan ALL values in the project object
                 if (!desc) {
                   const skipKeys = new Set(["name", "title", "projectName", "years", "date", "duration"]);
                   for (const [k, v] of Object.entries(proj)) {

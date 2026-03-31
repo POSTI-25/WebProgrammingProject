@@ -120,7 +120,7 @@ const About = () => {
             className="re-upload-btn"
             onClick={() => router.push('/')}
           >
-            Get Started — It's Free
+            Get Started - It's Free
           </button>
         </div>
       </section>

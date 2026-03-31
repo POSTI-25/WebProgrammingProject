@@ -142,7 +142,7 @@ def enhance_with_groq_once(
 	structured_json: Dict[str, Any],
 	selected_options: List[str],
 ) -> Dict[str, Any]:
-	"""Targeted Groq enhancement — only sends fields that benefit from AI rewriting.
+	"""Targeted Groq enhancement - only sends fields that benefit from AI rewriting.
 
 	Fields sent to Groq  : summary, experience (responsibilities), skills
 	Fields bypassed       : name, contact, education, projects, certifications, others
@@ -159,7 +159,7 @@ def enhance_with_groq_once(
 
 	client = Groq(api_key=api_key)
 
-	# ── Build a lean payload — only fields benefitting from enhancement ────────
+	# ── Build a lean payload - only fields benefitting from enhancement ────────
 	BYPASS_KEYS = {"name", "contact", "education", "projects", "certifications", "others"}
 	groq_payload = _strip_empty({
 		k: v for k, v in structured_json.items() if k not in BYPASS_KEYS
@@ -169,12 +169,12 @@ def enhance_with_groq_once(
 
 Rules:
 1) Input is a PARTIAL JSON resume object (summary, experience, skills only).
-2) Output must be valid JSON only — no markdown, no explanation.
+2) Output must be valid JSON only - no markdown, no explanation.
 3) Keep EXACT same schema and keys as input. Do NOT rename any key.
 4) Do not add or remove fields.
 5) Improve textual content based on selected options below.
 6) "summary" MUST be 2-3 complete, impactful professional sentences covering background, technical expertise, and career goal.
-7) "responsibilities" arrays MUST remain arrays of strings — do NOT merge or change data between different experience entries.
+7) "responsibilities" arrays MUST remain arrays of strings - do NOT merge or change data between different experience entries.
 
 Selected options: {json.dumps(selected_options)}
 

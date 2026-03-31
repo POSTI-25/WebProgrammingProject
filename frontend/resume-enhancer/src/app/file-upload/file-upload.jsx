@@ -247,7 +247,7 @@ export default function FileUpload() {
         </p>
       </div>
 
-    {/* UPLOAD CARD — hidden once results are in */}
+    {/* UPLOAD CARD - hidden once results are in */}
     {currentStep !== "result" && (
       <div className="upload-card">
         <div
@@ -340,14 +340,14 @@ export default function FileUpload() {
       </div>
     )}
 
-    {/* PDF RESULT SECTION — full width preview + actions */}
+    {/* PDF RESULT SECTION - full width preview + actions */}
     {currentStep === "result" && enhancedData && (
       <div className="result-section">
         <div className="result-header">
           <div>
-            <h2 className="result-title">✨ Your Enhanced Resume</h2>
+            <h2 className="result-title">Your Enhanced Resume</h2>
             <p className="result-subtitle">
-              {enhancedData.name} — preview below, download as PDF
+              {enhancedData.name} - preview below, download as PDF
             </p>
           </div>
           <div className="result-btns">
