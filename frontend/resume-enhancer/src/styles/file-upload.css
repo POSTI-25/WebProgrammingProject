@@ -451,8 +451,6 @@
 
 }
 
-/* ── Result Section ─────────────────────────────────────────────────────────── */
-
 .result-section {
   max-width: 1000px;
   margin: 0 auto 80px;
@@ -503,7 +501,7 @@
   align-items: center;
 }
 
-/* Download button - prominent glowing CTA */
+/* Download button */
 .download-btn {
   background: linear-gradient(90deg, #12d8fa 0%, #16ffaf 100%) !important;
   box-shadow: 0 0 24px rgba(22, 255, 175, 0.5) !important;
@@ -517,7 +515,7 @@
   box-shadow: 0 0 36px rgba(22, 255, 175, 0.75) !important;
 }
 
-/* Reset / back button - outlined secondary */
+/* Reset / back button */
 .reset-btn {
   background: transparent !important;
   border: 1.5px solid rgba(255, 255, 255, 0.3) !important;

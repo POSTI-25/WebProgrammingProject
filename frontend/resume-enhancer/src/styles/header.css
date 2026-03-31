@@ -1,9 +1,9 @@
 .main-header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center links vertically relative to the logo */
-  padding: 20px 20px;  /* Balanced breathing room */
-  background: transparent; /* Or your dark theme color */
+  align-items: center;
+  padding: 20px 20px;  
+  background: transparent; 
 }
 
 .logo {
@@ -12,12 +12,11 @@
 }
 
 .logo-img {
-  height: 100px;       /* Control the size via height to maintain aspect ratio */
-  width: auto;        /* Let the width adjust automatically */
+  height: 100px;       
+  width: auto;       
   display: block;
 }
 
-/* Navbar links */
 .nav-links {
   display: flex;
   gap: 50px;
@@ -33,7 +32,6 @@
   transition: 0.3s;
 }
 
-/* Hover effect */
 .nav-links a:hover {
   color: white;
 }

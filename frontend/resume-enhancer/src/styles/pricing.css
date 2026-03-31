@@ -1,5 +1,3 @@
-/* ===== PRICING PAGE ===== */
-
 .pricing-hero {
   max-width: 800px;
   margin: 0 auto;
@@ -75,7 +73,6 @@
   box-shadow: var(--re-shadow-card), var(--re-shadow-glow);
 }
 
-/* Popular card */
 .pricing-plan-card--popular {
   border-color: rgba(0, 212, 255, 0.3);
   box-shadow: 0 0 60px rgba(0, 212, 255, 0.1);
@@ -170,7 +167,7 @@
   align-items: center;
   justify-content: center;
 
-  width: auto; /* size to fit text like .re-upload-btn */
+  width: auto; 
   margin: 0 auto;
   padding: 12px 28px;
   border-radius: var(--re-radius-sm);
@@ -196,7 +193,6 @@
 }
 
 .pricing-cta-btn--primary {
-  /* Stronger emphasis for the popular plan: very sharp rim + big spread */
   background: rgba(6,8,12,0.98);
   border: 1px solid rgba(255,255,255,0.04);
   color: rgba(255,255,255,0.99);
@@ -245,7 +241,7 @@
   display: inline-block;
   font-size: 16px;
   font-weight: 700;
-  color: #07121a; /* dark text for contrast on bright gradient */
+  color: #07121a; 
   margin-bottom: 14px;
   padding: 10px 20px;
   border-radius: 999px;
@@ -260,7 +256,6 @@
   line-height: 1.7;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .pricing-plans-grid {
     grid-template-columns: 1fr;
@@ -279,13 +274,12 @@
   }
 }
 
-/* ===== CTA BUTTON FIX (ADDED) ===== */
 .re-upload-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto; /* size to fit text */
-  margin: 0 auto; /* center when used as block-level visual */
+  width: auto; 
+  margin: 0 auto; 
   box-sizing: border-box;
 
   padding: 12px 36px;
@@ -314,17 +308,15 @@
   transform: scale(0.97);
 }
 
-/* Ensure buttons inside plan cards are centered and spaced without affecting other text */
 .pricing-plan-card > .pricing-cta-btn,
 .pricing-plan-card > .re-upload-btn {
-  display: block; /* make block so margin auto centers reliably */
+  display: block; 
   width: auto;
   margin: 18px auto 0;
   text-align: center;
 }
 
-/* Hero CTA specific adjustments to center reliably */
 .feat-cta-card .re-upload-btn {
-  display: inline-block; /* keep compact, center via margin */
+  display: inline-block; 
   margin: 18px auto 0;
 }

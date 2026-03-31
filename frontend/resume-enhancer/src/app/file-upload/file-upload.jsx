@@ -5,7 +5,6 @@ import Header from "../../components/header.jsx";
 import { ResumePDF } from "../../components/resume-pdf.jsx";
 import "../../styles/file-upload.css";
 
-// PDFDownloadLink & PDFViewer must be loaded client-side only (no SSR)
 import dynamic from "next/dynamic";
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((m) => m.PDFDownloadLink),
@@ -247,7 +246,7 @@ export default function FileUpload() {
         </p>
       </div>
 
-    {/* UPLOAD CARD - hidden once results are in */}
+    {/* UPLOAD CARD */}
     {currentStep !== "result" && (
       <div className="upload-card">
         <div
@@ -340,7 +339,7 @@ export default function FileUpload() {
       </div>
     )}
 
-    {/* PDF RESULT SECTION - full width preview + actions */}
+    {/* PDF RESULT SECTION */}
     {currentStep === "result" && enhancedData && (
       <div className="result-section">
         <div className="result-header">

@@ -159,7 +159,7 @@ def enhance_with_groq_once(
 
 	client = Groq(api_key=api_key)
 
-	# ── Build a lean payload - only fields benefitting from enhancement ────────
+	
 	BYPASS_KEYS = {"name", "contact", "education", "projects", "certifications", "others"}
 	groq_payload = _strip_empty({
 		k: v for k, v in structured_json.items() if k not in BYPASS_KEYS
@@ -208,10 +208,8 @@ Input JSON:
 	except json.JSONDecodeError as exc:
 		raise RuntimeError("Groq did not return valid JSON") from exc
 
-	# ── Merge: Groq-enhanced fields + bypassed fields from original ────────────
 	result = {**structured_json, **enhanced_partial}
 
-	# Coerce the enhanced portion back to original schema to prevent type drift
 	return _coerce_to_schema(structured_json, result)
 
 
@@ -221,26 +219,3 @@ Input JSON:
 
 
 
-# from google import genai
-# import os
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# def get_client():
-#     api_key = os.getenv("GEMINI_API_KEY")
-#     if not api_key:
-#         raise ValueError("❌ GEMINI_API_KEY not found")
-#     return genai.Client(api_key=api_key)
-
-
-# def list_all_models():
-#     client = get_client()
-
-#     models = client.models.list()
-#     model_names = []
-
-#     for model in models:
-#         model_names.append(model.name)
-
-#     return model_names

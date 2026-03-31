@@ -106,8 +106,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team section removed (content was placeholder/fake) */}
-
       {/* CTA */}
       <section className="feat-cta-section">
         <div className="feat-cta-card">
