@@ -1,8 +1,20 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
 import Header from "../../components/header.jsx";
+import { ResumePDF } from "../../components/resume-pdf.jsx";
 import "../../styles/file-upload.css";
+
+// PDFDownloadLink & PDFViewer must be loaded client-side only (no SSR)
+import dynamic from "next/dynamic";
+const PDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((m) => m.PDFDownloadLink),
+  { ssr: false }
+);
+const PDFViewer = dynamic(
+  () => import("@react-pdf/renderer").then((m) => m.PDFViewer),
+  { ssr: false }
+);
 
 const ENHANCEMENT_OPTIONS = [
   "ATS Compatibility",
@@ -235,22 +247,23 @@ export default function FileUpload() {
         </p>
       </div>
 
-    {/* UPLOAD CARD */}
-        <div className="upload-card">
-          <div
-            className="upload-dropzone"
-            onClick={handleUploadClick}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-          >
-            <div className="upload-icon">
+    {/* UPLOAD CARD — hidden once results are in */}
+    {currentStep !== "result" && (
+      <div className="upload-card">
+        <div
+          className="upload-dropzone"
+          onClick={handleUploadClick}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+        >
+          <div className="upload-icon">
             <img src="/assets/file-upload.png" alt="Upload" />
-            </div>
+          </div>
 
-            <p className="upload-text">Drag & drop your resume here</p>
-            <p className="upload-hint">or click to browse files</p>
+          <p className="upload-text">Drag & drop your resume here</p>
+          <p className="upload-hint">or click to browse files</p>
 
-            <button
+          <button
             className="upload-btn"
             onClick={(e) => {
               e.stopPropagation();
@@ -323,14 +336,56 @@ export default function FileUpload() {
           )}
 
           {errorMessage && <p className="file-selected">{errorMessage}</p>}
-
-          {currentStep === "result" && enhancedData && (
-            <pre className="file-selected" style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              {JSON.stringify(enhancedData, null, 2)}
-            </pre>
-          )}
         </div>
       </div>
+    )}
+
+    {/* PDF RESULT SECTION — full width preview + actions */}
+    {currentStep === "result" && enhancedData && (
+      <div className="result-section">
+        <div className="result-header">
+          <div>
+            <h2 className="result-title">✨ Your Enhanced Resume</h2>
+            <p className="result-subtitle">
+              {enhancedData.name} — preview below, download as PDF
+            </p>
+          </div>
+          <div className="result-btns">
+            <PDFDownloadLink
+              document={<ResumePDF data={enhancedData} />}
+              fileName={`${enhancedData?.name || "resume"}_enhanced.pdf`}
+            >
+              {({ loading }) => (
+                <button className="upload-btn download-btn" disabled={loading}>
+                  {loading ? "Preparing PDF…" : "⬇ Download PDF"}
+                </button>
+              )}
+            </PDFDownloadLink>
+
+            <button
+              className="upload-btn reset-btn"
+              onClick={() => {
+                setCurrentStep("upload");
+                setEnhancedData(null);
+                setFileName("");
+                setSelectedFile(null);
+                setDocumentId("");
+                setSelectedOptions([]);
+              }}
+            >
+              ↩ Enhance Another
+            </button>
+          </div>
+        </div>
+
+        {/* Embedded live PDF preview */}
+        <div className="pdf-preview-wrapper">
+          <PDFViewer width="100%" height="100%" showToolbar={false}>
+            <ResumePDF data={enhancedData} />
+          </PDFViewer>
+        </div>
+      </div>
+    )}
 
       {/* Factors Section */}
       <div className="upload-factors">

@@ -39,11 +39,11 @@ def structure_with_gemini_verbose(raw_text: str) -> Dict[str, Any]:
 
 	prompt = f"""
 You are given raw unstructured resume text.
-Your task is to organize it into a JSON object.
+Your task is to extract and organize ALL information into a JSON object faithfully.
 
-Return JSON only. No markdown. No explanation.
+Return JSON only. No markdown. No explanation. Do NOT invent or expand any content.
 
-Use this loose schema:
+Use this schema:
 {{
   "name": "",
   "contact": "",
@@ -56,8 +56,12 @@ Use this loose schema:
   "others": []
 }}
 
-If a field is missing, use empty string or empty array.
-Capture as much information as possible.
+Extraction rules:
+- Copy text EXACTLY as it appears. Do not rephrase or expand anything.
+- If a field is missing in the source text, use empty string or empty array.
+- For each experience item, extract a "responsibilities" array of bullet points.
+- For each education item, always extract "gpa" or "cgpa" if present in the text.
+- For "contact", join all contact info into one string separated by " | ".
 
 Raw text:
 {raw_text}
@@ -123,16 +127,31 @@ def _coerce_to_schema(schema_source: Any, candidate: Any) -> Any:
 	return candidate
 
 
+def _strip_empty(data: Any) -> Any:
+	"""Recursively remove empty strings, dicts, and lists to save LLM tokens."""
+	if isinstance(data, dict):
+		cleaned = {k: _strip_empty(v) for k, v in data.items()}
+		return {k: v for k, v in cleaned.items() if v not in ("", [], {})}
+	if isinstance(data, list):
+		cleaned = [_strip_empty(item) for item in data]
+		return [item for item in cleaned if item not in ("", [], {})]
+	return data
+
+
 def enhance_with_groq_once(
 	structured_json: Dict[str, Any],
 	selected_options: List[str],
 ) -> Dict[str, Any]:
-	"""Use exactly one Groq call to enhance content while preserving JSON schema."""
+	"""Targeted Groq enhancement — only sends fields that benefit from AI rewriting.
+
+	Fields sent to Groq  : summary, experience (responsibilities), skills
+	Fields bypassed       : name, contact, education, projects, certifications, others
+	                        (kept exactly from Gemini extraction to prevent hallucination)
+	"""
 	api_key = os.getenv("GROQ_API_KEY")
 	if not api_key:
 		raise RuntimeError("Missing GROQ_API_KEY")
 
-	# Imported here to keep startup resilient when Groq isn't needed.
 	from groq import Groq
 
 	if not selected_options:
@@ -140,34 +159,40 @@ def enhance_with_groq_once(
 
 	client = Groq(api_key=api_key)
 
-	prompt = f"""
-You are a resume enhancement engine.
+	# ── Build a lean payload — only fields benefitting from enhancement ────────
+	BYPASS_KEYS = {"name", "contact", "education", "projects", "certifications", "others"}
+	groq_payload = _strip_empty({
+		k: v for k, v in structured_json.items() if k not in BYPASS_KEYS
+	})
+
+	prompt = f"""You are a resume enhancement engine.
 
 Rules:
-1) Input is a JSON resume object.
-2) Output must be valid JSON only (no markdown, no explanation).
-3) Keep EXACT same schema and keys as input JSON.
+1) Input is a PARTIAL JSON resume object (summary, experience, skills only).
+2) Output must be valid JSON only — no markdown, no explanation.
+3) Keep EXACT same schema and keys as input. Do NOT rename any key.
 4) Do not add or remove fields.
-5) Improve only textual content related to selected options.
+5) Improve textual content based on selected options below.
+6) "summary" MUST be 2-3 complete, impactful professional sentences covering background, technical expertise, and career goal.
+7) "responsibilities" arrays MUST remain arrays of strings — do NOT merge or change data between different experience entries.
 
-Selected options:
-{json.dumps(selected_options)}
+Selected options: {json.dumps(selected_options)}
 
 Option meanings:
 - ATS Compatibility: improve ATS-friendly wording and clarity.
 - Grammar & Style Fixes: correct grammar, spelling, and phrasing.
 - Keyword Optimization: improve relevant keyword usage naturally.
-- Soft Skills Integration: strengthen soft skills phrasing.
+- Soft Skills Integration: strengthen soft skills phrasing naturally.
 
 Input JSON:
-{json.dumps(structured_json, ensure_ascii=False)}
+{json.dumps(groq_payload, ensure_ascii=False)}
 """
 
 	try:
 		response = client.chat.completions.create(
 			model="llama-3.1-8b-instant",
 			messages=[
-				{"role": "system", "content": "Return JSON only."},
+				{"role": "system", "content": "Return JSON only. Preserve all original data across different entries."},
 				{"role": "user", "content": prompt},
 			],
 			temperature=0.2,
@@ -179,11 +204,16 @@ Input JSON:
 
 	cleaned = _extract_json_block(raw_output)
 	try:
-		parsed = json.loads(cleaned)
+		enhanced_partial = json.loads(cleaned)
 	except json.JSONDecodeError as exc:
 		raise RuntimeError("Groq did not return valid JSON") from exc
 
-	return _coerce_to_schema(structured_json, parsed)
+	# ── Merge: Groq-enhanced fields + bypassed fields from original ────────────
+	result = {**structured_json, **enhanced_partial}
+
+	# Coerce the enhanced portion back to original schema to prevent type drift
+	return _coerce_to_schema(structured_json, result)
+
 
 
 
